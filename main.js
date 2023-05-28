@@ -33,6 +33,7 @@ const msg=document.querySelector('.msg');
 const userList=document.querySelector('#users');
 
 myForm.addEventListener('submit', onSubmit);
+userList.addEventListener('click',removeItem);
 
 function onSubmit(e){
     e.preventDefault();
@@ -45,6 +46,19 @@ function onSubmit(e){
     }else{
         const li=document.createElement('li');
         li.appendChild(document.createTextNode(`name : ${nameInput.value} : email : ${emialInput.value}`));
+
+        //create delete button element
+        var deleteBtn=document.createElement('button');
+
+        //add classes to delete button
+        deleteBtn.className='btn btn-danger btn-sm float-right delete';
+
+        //append text node
+        deleteBtn.appendChild(document.createTextNode('Delete'));
+
+        //append button to li
+        li.appendChild(deleteBtn);
+
 
         //if we wamt to store the input of the user in local storage
         // localStorage.setItem('name',nameInput.value);
@@ -95,6 +109,15 @@ function onSubmit(e){
     }
 
     // console.log(nameInput.value);
+}
+
+function removeItem(e){
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are you Sure')){
+            var li=e.target.parentElement;
+            userList.removeChild(li);
+        }
+    }
 }
 
 
