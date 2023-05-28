@@ -47,9 +47,19 @@ function onSubmit(e){
         li.appendChild(document.createTextNode(`name : ${nameInput.value} : email : ${emialInput.value}`));
 
         //if we wamt to store the input of the user in local storage
-        localStorage.setItem('name',nameInput.value);
-        localStorage.setItem('Email',emialInput.value);
-        
+        // localStorage.setItem('name',nameInput.value);
+        // localStorage.setItem('Email',emialInput.value);
+
+        let myObj = {
+            name1: nameInput.value,
+            email1: emialInput.value
+        };
+
+        let myObj_ser=JSON.stringify(myObj);
+        localStorage.setItem('myObj',myObj_ser);
+        let myObj_des=JSON.parse(localStorage.getItem('myObg'));
+        console.log(myObj_des);
+
         userList.appendChild(li);
 
         //Clear fields
