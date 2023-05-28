@@ -34,6 +34,7 @@ const userList=document.querySelector('#users');
 
 myForm.addEventListener('submit', onSubmit);
 userList.addEventListener('click',removeItem);
+// userList.addEventListener('click',editInputs);
 
 function onSubmit(e){
     e.preventDefault();
@@ -48,16 +49,42 @@ function onSubmit(e){
         li.appendChild(document.createTextNode(`name : ${nameInput.value} : email : ${emialInput.value}`));
 
         //create delete button element
-        var deleteBtn=document.createElement('button');
+        // var deleteBtn=document.createElement('button');
+        // var editBtn=document.createElement('button');
 
         //add classes to delete button
-        deleteBtn.className='btn btn-danger btn-sm float-right delete';
+        // deleteBtn.className='btn btn-danger btn-sm float-right delete';
+        // editBtn.className='btn btn-danger btn-sm float-right edit';
 
         //append text node
-        deleteBtn.appendChild(document.createTextNode('Delete'));
+        // deleteBtn.appendChild(document.createTextNode('Delete'));
+        // editBtn.appendChild(document.createTextNode('Edit'));
+        
+
+        
+
+        const deleteButton=document.createElement('input');
+        deleteButton.type='button';
+        deleteButton.value='delete';
+        deleteButton.onclick=()=>{
+            localStorage.removeItem(myObj.email1);
+            userList.removeChild(li);
+        }
+
+
+        const editButton=document.createElement('input');
+        editButton.type='button';
+        editButton.value='Edit';
+        editButton.onclick=()=>{
+        localStorage.removeItem(myObj.email1);
+        userList.removeChild(li);
+        document.getElementById('name').value=myObj.name1;
+        document.getElementById('email').value=myObj.email1;
+        }   
 
         //append button to li
-        li.appendChild(deleteBtn);
+        li.appendChild(deleteButton);
+        li.appendChild(editButton);
 
 
         //if we wamt to store the input of the user in local storage
@@ -68,7 +95,7 @@ function onSubmit(e){
 
         let myObj = {
             name1:nameInput.value,
-            email1:emialInput
+            email1:emialInput.value
         };
 
         var existingUserDataString=localStorage.getItem("user");
@@ -119,6 +146,7 @@ function removeItem(e){
         }
     }
 }
+
 
 
 
