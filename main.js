@@ -50,15 +50,42 @@ function onSubmit(e){
         // localStorage.setItem('name',nameInput.value);
         // localStorage.setItem('Email',emialInput.value);
 
+        
+
         let myObj = {
-            name1: nameInput.value,
-            email1: emialInput.value
+            name1:nameInput.value,
+            email1:emialInput
         };
 
-        let myObj_ser=JSON.stringify(myObj);
-        localStorage.setItem('myObj',myObj_ser);
-        let myObj_des=JSON.parse(localStorage.getItem('myObg'));
-        console.log(myObj_des);
+        var existingUserDataString=localStorage.getItem("user");
+
+        if(existingUserDataString){
+            var existingUserData=JSON.parse(existingUserDataString);
+        }else{
+            var existingUserData=[];
+        }
+
+        var myObj_ser=JSON.stringify(myObj);
+        existingUserData.push(myObj);
+
+        var updateUserDataString=JSON.stringify(existingUserData);
+
+        localStorage.setItem("user",updateUserDataString);
+
+        // let myObj_ser=JSON.stringify(myObj);
+        // localStorage.setItem('myObj',myObj_ser);
+        // let myObj_des=JSON.parse(localStorage.getItem('myObg'));
+        // console.log(myObj_des);
+
+        //Serialize and store myobj
+        // var userString=JSON.stringify(myObj);
+        
+
+        //Retrieve and parse myobj
+        // var userString=localStorage.getItem("myObj");
+        // var user1=JSON.parse(userString);
+        // var arrayString=user1;
+
 
         userList.appendChild(li);
 
